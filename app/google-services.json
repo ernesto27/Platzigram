@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "47896100833",
+    "firebase_url": "https://phonegapmaps.firebaseio.com",
+    "project_id": "phonegapmaps",
+    "storage_bucket": "phonegapmaps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47896100833:android:3e18d6646cb454e0",
+        "android_client_info": {
+          "package_name": "com.platzi.platzigram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47896100833-3h9dt9ivshka0pa1n154bs4a14c323iu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.platzi.platzigram",
+            "certificate_hash": "a72e03612a4ec9f94a9413685e4b1dff2e84349c"
+          }
+        },
+        {
+          "client_id": "47896100833-kljlcm8f1h9n0hnd6ago6tjdravodtgg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdFRb-0b0gqn63JC1sMhtXOSA0aKWtFSI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47896100833-kljlcm8f1h9n0hnd6ago6tjdravodtgg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

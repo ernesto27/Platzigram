@@ -13,7 +13,6 @@ import com.platzi.platzigram.R;
 import com.platzi.platzigram.login.presenter.LoginPresenter;
 import com.platzi.platzigram.login.presenter.LoginPresenterImpl;
 import com.platzi.platzigram.view.ContainerActivity;
-import com.platzi.platzigram.view.CreateAccountActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginView{
 
@@ -41,6 +40,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
             }
         });
+    }
+
+    public void goCreateAccount(View view){
+        goCreateAccount();
     }
 
 
