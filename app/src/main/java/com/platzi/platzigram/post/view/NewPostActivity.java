@@ -1,16 +1,34 @@
 package com.platzi.platzigram.post.view;
 
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.platzi.platzigram.PlatzigramApplication;
 import com.platzi.platzigram.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+
 public class NewPostActivity extends AppCompatActivity {
 
+    private static final String TAG = "NewPostActivity";
     private ImageView imgPhoto;
+    private String photoPath;
+    private Button btnCreatePost;
+    private PlatzigramApplication app;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +36,75 @@ public class NewPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
 
         imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
+        btnCreatePost = (Button) findViewById(R.id.createPost);
+
+        app = (PlatzigramApplication) getApplicationContext();
+        storageReference = app.getStorageReference();
+
+        btnCreatePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadPhoto();
+            }
+        });
+
         if(getIntent().getExtras() != null){
-            String photoPath = getIntent().getExtras().getString("IMAGE_PATH_TEMP");
-            Picasso.with(this).load(photoPath).into(imgPhoto);
+            photoPath = getIntent().getExtras().getString("IMAGE_PATH_TEMP");
+            showPhoto();;
+
         }
     }
+
+    private void uploadPhoto() {
+        imgPhoto.setDrawingCacheEnabled(true);
+        imgPhoto.buildDrawingCache();
+
+        Bitmap bitmap = imgPhoto.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        byte[] photoByte = baos.toByteArray();
+
+        String photoName = photoPath.substring(photoPath.lastIndexOf("/") + 1, photoPath.length());
+
+        StorageReference photoReference = storageReference.child("postimages/" + photoName);
+
+        UploadTask uploadTask = photoReference.putBytes(photoByte);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error upload photo " + e.toString());
+                e.printStackTrace();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri uriPhoto = taskSnapshot.getDownloadUrl();
+                String photoURL = uriPhoto.toString();
+                Log.w(TAG, "URL photo: " + photoURL);
+                finish();
+            }
+        });
+
+
+    }
+
+    private void showPhoto(){
+        Picasso.with(this).load(photoPath).into(imgPhoto);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

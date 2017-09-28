@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.platzi.platzigram.R;
 import com.platzi.platzigram.adapter.PictureAdapterRecyclerView;
 import com.platzi.platzigram.model.Picture;
@@ -82,6 +83,7 @@ public class HomeFragment extends Fragment {
                 photoFile = createImageFile();
             }catch (Exception e){
                 e.printStackTrace();
+                FirebaseCrash.report(e);
             }
 
             if(photoFile != null){

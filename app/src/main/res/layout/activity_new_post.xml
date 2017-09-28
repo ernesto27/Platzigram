@@ -6,7 +6,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.platzi.platzigram.post.view.NewPostActivity">
 
-    <include layout="@layout/actionbar_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"

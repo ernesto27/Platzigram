@@ -67,7 +67,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".view.ContainerActivity" />
         <activity
-            android:name=".view.PictureDetailActivity"
+            android:name=".post.view.PictureDetailActivity"
             android:parentActivityName=".view.ContainerActivity">
             >
             <meta-data
